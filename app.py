@@ -100,7 +100,7 @@ def bookmark():
             'href': json_data['link'],
             'description': json_data['title'],
             'extended': json_data['extended'],
-            'tags': db.Tags(json_data['tags'].split(' ')),
+            'tags': db.Tags(json_data['tags'].strip().split(' ')),
             'shared': json_data['shared'],
             'big_id': json_data.get('big_id'),
             'owner': flask_login.current_user.get_id(),
