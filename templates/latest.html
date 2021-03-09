@@ -80,8 +80,8 @@
 <div class="pagination">
   {% if prev_start is not none %}
     <a class="pagination" href="?{% if search %}?search={{ search }}{% endif %}">Newest</a>
-    <a class="pagination" href="?start={{ prev_start }}{% if search %}search={{ search }}{% endif %}">&laquo; Newer</a>
+    <a class="pagination" href="?start={{ prev_start }}{% if search %}&search={{ search }}{% endif %}">&laquo; Newer</a>
   {% endif %}
-    <a class="pagination" href="?start={{ next_start }}{% if search %}search={{ search }}{% endif %}">Older &raquo;</a>
+    <a class="pagination" href="?start={{ next_start }}{% if search %}&search={{ search }}{% endif %}">Older &raquo;</a>
 </div>
 {% endblock %}

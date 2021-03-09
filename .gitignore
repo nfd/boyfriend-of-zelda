@@ -2,3 +2,4 @@ __pycache__
 Session.vim
 instance/*
 *export*.xml
+deploy-config.txt
