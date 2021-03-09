@@ -5,6 +5,7 @@ import getpass
 import sqlite3
 import uuid
 import xml.parsers.expat
+import sys
 
 import bcrypt
 import click
@@ -245,8 +246,11 @@ def db_import_command(filename):
     parser = xml.parsers.expat.ParserCreate()
     parser.StartElementHandler = start_element
 
-    with open(filename, 'rb') as handle:
-        parser.ParseFile(handle)
+    if filename == '-':
+        parser.ParseFile(sys.stdin.buffer)
+    else:
+        with open(filename, 'rb') as handle:
+            parser.ParseFile(handle)
 
     db.commit()
     cursor.close()
