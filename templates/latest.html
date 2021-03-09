@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <div id="id_controls">
+    <button class="control {% if not current_user.is_authenticated %} hidden {% endif %}" id="id_add_button">+</button>
+    <button class="control {% if not current_user.is_authenticated %} hidden {% endif %}" id="id_edit_button">Edit</button>
+    <form><input class="control" name="search" type="text" id="id_search" {% if search %} value="{{ search }}" {% endif %} placeholder="&#x1f50d;"></form>
+    <span class="user">
+      {% if current_user.is_authenticated %}
+      <a class="a_user_control" href="{% if is_private_user_page %}{{ url_for('show_api_key') }}{% else %}{{ url_for('index_for_user', username=current_user.username) }}{% endif %}">&#x1F9D1;</a>
+      {% else %}
+        <a id="id_a_log_in" class="a_user_control" href="#">&#x1F916; Log in</a>
+      {% endif %}
+    </span>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div class="log_in" id="id_div_log_in">
+    <form method="POST" action="{{ url_for('log_in') }}">
+      <div class="form-group">
+        <label for="id_username">User name</label>
+        <input type="text" name="username" id="id_username">
+        <label for="id_password">Password</label>
+        <input type="password" name="password" id="id_password">
+        <input type="submit" style="display: none">
+      </div>
+    </form>
+  </div>
+
+  <div class="add_edit" id="id_add_edit">
+    <form action="#">
+      <input type="hidden" name="big_id" id="id_big_id" value="">
+
+      <div class="form-group">
+        <label for="id_link">Link</label>
+        <input type="text" name="link" id="id_link" placeholder="https://lardcave.net/">
+      </div>
+      <div class="form-group">
+        <label for="id_title">Title</label>
+        <input type="text" name="title" id="id_title" placeholder="Nicholas' Homepage">
+      </div>
+      <div class="form-group">
+        <label for="id_extended">Extended</label>
+        <textarea name="extended" id="id_extended"></textarea>
+      </div>
+      <div class="form-group">
+        <span class="tags">
+          <label for="id_tags">Tags</label>
+          <input type="text" name="tags" id="id_tags">
+        </span>
+        <span class="add_edit_shared" id="id_add_edit_shared">
+          <label id="id_shared_label" class="control toggle">
+            <input type="checkbox" name="shared" id="id_shared" checked>
+            <span id="shared_checked">&#x1f513;</span><span id="shared_unchecked">&#x1f512;</span>
+          </label>
+        </span>
+      </div>
+      <input id="id_addedit_submit" type="submit" name="submit" value="Add">
+    </form>
+  </div>
+
+{% for row in rows %}
+  <div class="bookmark {% if row[columns['shared']]==0 %}private{% endif %}" data-big_id="{{ row[columns['big_id']] }}">
+    <div class="bookmark_controls">
+      <button class="bookmark_edit">&#x270f;&#xfe0f;</button>
+      <button class="bookmark_delete">&#x274c;</button>
+    </div>
+    <h2><span class="bookmark_shared">{% if row[columns['shared']]==0 %}&#x1f512;{% endif %}</span><a href="{{ row[columns['href']] }}"><span class="description">{{ row[columns['description']] }}</span></a></h2>
+    <span class="href">{{ row[columns['href']] }}</span>
+    <p class="extended">{{ row[columns['extended']] }}</p>
+    {% if row[columns['tags']] %}
+      {% for tag in row[columns['tags']] %}
+        <span class="tag">{{ tag }}</span>
+      {% endfor %}
+    {% endif %}
+    <span class="created">{{ row[columns['created']] }}</span>
+  </div>
+{% endfor %}
+<div class="pagination">
+  {% if prev_start is not none %}
+    <a class="pagination" href="?{% if search %}?search={{ search }}{% endif %}">Newest</a>
+    <a class="pagination" href="?start={{ prev_start }}{% if search %}search={{ search }}{% endif %}">&laquo; Newer</a>
+  {% endif %}
+    <a class="pagination" href="?start={{ next_start }}{% if search %}search={{ search }}{% endif %}">Older &raquo;</a>
+</div>
+{% endblock %}

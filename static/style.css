@@ -1,0 +1,239 @@
+body {
+	font-family: sans-serif;
+	background: #eef;
+}
+
+div.content 
+{
+	padding-top: 40px;
+}
+
+.hidden {
+	display: none;
+}
+
+.bookmark {
+	width: 40em;
+	padding: 0.5em;
+	padding: 1em;
+	border-bottom: 1px dotted #aab;
+}
+
+.private {
+	background: #ddf;
+}
+
+.bookmark h2 {
+	padding: 0;
+	padding-bottom: 5px;
+	margin: 0;
+	border: 0;
+}
+
+.bookmark h2 a {
+	text-decoration: none;
+	color: #005;
+}
+
+.bookmark h2 a:visited {
+	text-decoration: none;
+	color: #005;
+}
+
+.bookmark .href {
+	font-size: smaller;
+}
+
+.tag {
+	font-size: smaller;
+	border: 1px solid black;
+	background: #aaf;
+	padding-left: 0.2em;
+	padding-right: 0.2em;
+}
+
+.created {
+	font-size: smaller;
+}
+
+.add_edit {
+	padding: 5px;
+	width: 40em;
+	display: none;
+}
+
+#id_controls {
+	position: fixed;
+	width: 40em;
+	height: 40px;
+	text-align: right;
+}
+
+.control {
+	border: 0;
+	border-radius: 5px;
+	font-size: 12pt;
+	font-weight: bold;
+	box-shadow: 5px 5px 5px gray;
+	padding: 5px;
+	padding-left: 20px;
+	padding-right: 20px;
+	margin-left: 16px;
+	margin-bottom: 16px;
+}
+
+#id_add_button {
+	background: #f7a;
+}
+
+#id_edit_button {
+	background: #7af;
+}
+
+#id_search {
+	background: #fff7f0;
+}
+
+#id_shared_label {
+	margin-top: 0.7em;
+	background: #fea;
+}
+
+#id_controls form {
+	display: inline;
+}
+
+#id_controls span.user {
+	display: inline-block;
+	margin-left: 0.5em;
+}
+
+.add_edit input[type='text'],input[type='url'] {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #aaa;
+	border-radius: 5px;
+}
+
+.log_in input[type='text'],input[type='password'] {
+	width: 20am;
+	padding: 5px;
+	border: 1px solid #aaa;
+	border-radius: 5px;
+}
+
+.add_edit textarea {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #aaa;
+	border-radius: 5px;
+}
+
+
+span.tags {
+	width: 34em;
+	display: inline-block;
+}
+
+label {
+	font-size: 9pt;
+}
+
+.form-group {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+input[type='submit'] {
+	padding: 5px;
+	border: 1px solid #aaa;
+	border-radius: 5px;
+	width: 100%;
+	display: block;
+}
+
+.toggle{
+	display:inline-block;
+}
+/* This is the style for a checked "button" */
+.toggle.checked{
+}
+
+/* Hide the checkbox */
+.toggle input{
+	display:none
+}
+
+#shared_unchecked {
+	display: none;
+}
+
+#shared_checked {
+	display: none;
+}
+
+.add_edit_shared {
+	display: block;
+	width: 6em;
+	text-align: center;
+	float: right;
+}
+
+.bookmark_controls {
+	float: right;
+	display: none;
+}
+
+.bookmark_controls button {
+	border: 0;
+	border-radius: 5px;
+	box-shadow: 2px 2px 5px gray;
+	background: white;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-size: 14pt;
+}
+
+.bookmark_controls .bookmark_delete {
+	color: red;
+	font-weight: bold;
+}
+
+div.pagination {
+	width: 40em;
+	text-align: center;
+}
+
+a.pagination {
+	font-size: 16pt;
+	display: inline-block;
+	margin: 10px;
+	text-decoration: none;
+	color: #005;
+}
+
+a.pagination:visited {
+	color: #005;
+}
+
+.a_user_control {
+	font-size: smaller;
+	text-decoration: none;
+	color: #005;
+}
+
+.a_user_control:visited {
+	color: #005;
+}
+
+div.log_in {
+	width: 40em;
+	text-align: center;
+	padding: 5px;
+	background: white;
+	border-radius: 5px;
+	display: none;
+}
+

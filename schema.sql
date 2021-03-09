@@ -1,0 +1,21 @@
+DROP TABLE IF EXISTS bookmark;
+
+CREATE TABLE valued_customers (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	username TEXT NOT NULL,
+	password_hash TEXT NOT NULL,
+	api_key TEXT
+);
+
+CREATE TABLE bookmarks (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	owner INTEGER NOT NULL REFERENCES valued_customers,
+	created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	visited TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	href TEXT NOT NULL,
+	description TEXT NOT NULL,
+	extended TEXT,
+	shared BOOLEAN NOT NULL CHECK(shared in (0, 1)),
+	big_id TEXT UNIQUE NOT NULL,
+	tags tags
+);

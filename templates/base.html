@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='style.js') }}"></script>
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+  <body>
+    <header>
+      {% block header %}{% endblock %}
+    </header>
+    <div class="content">
+      {% for message in get_flashed_messages() %}
+        <div class="flash">{{ message }}</div>
+      {% endfor %}
+      {% block content %}{% endblock %}
+    </div>
+  </body>
+  <script>
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</html>
