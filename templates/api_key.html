@@ -6,4 +6,8 @@
 
 {% block content %}
   <p>Your API key is <tt>{{ api_key }}</tt>.</p>
+  <p>Use this as an "add page" bookmarklet:</p>
+  <code>
+    javascript:window.location.href="https://boyfriend-of-zelda.apps.lardcave.net/?add="+encodeURIComponent(window.location.href)+"&title="+encodeURIComponent(document.title)+"&return_to="+encodeURIComponent(window.location.href);
+  </code>
 {% endblock %}
