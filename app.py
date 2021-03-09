@@ -148,7 +148,8 @@ def export():
     amount = 1000
     offset = 0
     while True:
-        bookmarks = db.get_bookmarks(amount, offset=offset)
+        bookmarks = db.get_bookmarks(amount, offset=offset, username=flask_login.current_user.username,
+                                     include_private=True)
         columns = {name: idx for idx, name in enumerate(bookmarks['columns'])}
         rows = bookmarks['rows']
         if not rows:
