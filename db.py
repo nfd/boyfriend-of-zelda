@@ -247,7 +247,7 @@ def db_import_command(filename):
     parser.StartElementHandler = start_element
 
     if filename == '-':
-        parser.ParseFile(sys.stdin.buffer)
+        parser.Parse(sys.stdin.read())
     else:
         with open(filename, 'rb') as handle:
             parser.ParseFile(handle)
