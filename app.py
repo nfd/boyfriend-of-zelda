@@ -96,6 +96,7 @@ def bookmark():
             'tags': db.Tags(json_data['tags'].split(' ')),
             'shared': json_data['shared'],
             'big_id': json_data.get('big_id'),
+            'owner': flask_login.current_user.get_id(),
         }
 
         if not json_data.get('big_id'):
