@@ -97,6 +97,9 @@ function edit_bookmark(event)
     }
     elemid("id_tags").value = tags.join(" ");
     elemid("id_addedit_submit").value = "Update";
+    console.log(bookmark_div.classList.contains("private"));
+    elemid("id_shared").checked = !(bookmark_div.classList.contains("private"));
+    update_shared_checkbox(null);
 
     enable_add_edit_frame();
     event.preventDefault();
