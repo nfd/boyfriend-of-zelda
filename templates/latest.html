@@ -72,8 +72,10 @@
       <button class="bookmark_delete">&#x274c;</button>
     </div>
     <h2><span class="bookmark_shared">{% if row[columns['shared']]==0 %}&#x1f512;{% endif %}</span><a href="{{ row[columns['href']] }}"><span class="description">{{ row[columns['description']] }}</span></a></h2>
-    <span class="href">{{ row[columns['href']] }}</span>
-    <p class="extended">{{ row[columns['extended']] }}</p>
+    <span class="href">{{ row[columns['href']] }}</span><br/>
+    {% if row[columns['extended']] %}
+      <p class="extended">{% for line in row[columns['extended']].split('\n') %}{{ line }}<br>{% endfor %}</p>
+    {% endif %}
     {% if row[columns['tags']] %}
       {% for tag in row[columns['tags']] %}
         <span class="tag">{{ tag }}</span>
