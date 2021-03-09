@@ -43,17 +43,21 @@ function enable_add_edit_frame()
     elemid("id_add_button").textContent = "-";
 }
 
+function enable_add_edit_frame_for_add()
+{
+    enable_add_edit_frame();
+    clear_add_edit_fields();
+    elemid("id_addedit_submit").value = "Add";
+}
+
 function on_add_bookmark_clicked(event) {
     var add_frame = elemid("id_add_edit");
     if(add_frame.style.display == "none" || add_frame.style.display == "") {
-        enable_add_edit_frame();
+        enable_add_edit_frame_for_add();
     } else {
         elemid("id_add_button").textContent = "+";
         add_frame.style.display = "none";
     }
-
-    clear_add_edit_fields();
-    elemid("id_addedit_submit").value = "Add";
 
     event.preventDefault();
 }
@@ -135,6 +139,7 @@ function add_edit_submit(event)
         extended: elemid("id_extended").value,
         tags: elemid("id_tags").value,
         shared: elemid("id_shared").checked ? "yes" : "no",
+        return_to: elemid("id_return_to").value
     }
 
     fetch("/bookmark", {
@@ -146,8 +151,12 @@ function add_edit_submit(event)
         if(data.updated === true) {
             //console.log("Would add ");
             // console.log(data);
-            // TODO rather than refresh, update the DOM (and clear the form!).
-            window.location.reload();
+            if (data.return_to == '.') {
+                // TODO rather than refresh, update the DOM (and clear the form!).
+                window.location.reload();
+            } else {
+                window.location.href = data.return_to;
+            }
         }
     });
     return false;
@@ -161,6 +170,20 @@ function init_bookmark_editors()
 
     for(element of document.getElementsByClassName("bookmark_delete")) {
         element.addEventListener("click", delete_bookmark);
+    }
+}
+
+function init_add_link_dict(add_link_dict_element_id)
+{
+    var add_link_dict = JSON.parse(document.getElementById(add_link_dict_element_id).textContent);
+
+    if(add_link_dict.url) {
+        enable_add_edit_frame_for_add();
+        elemid('id_link').value = add_link_dict.url;
+        if(add_link_dict.title)
+            elemid('id_title').value = add_link_dict.title;
+        if(add_link_dict.return_to)
+            elemid('id_return_to').value = add_link_dict.return_to;
     }
 }
 
@@ -185,5 +208,8 @@ function init(event)
     /* Logging in */
     if(elemid("id_a_log_in") !== null)
         elemid("id_a_log_in").addEventListener("click", show_login_form);
+
+    /* Add a link (for bookmarklets) */
+    init_add_link_dict('id_add_link_dict');
 }
 

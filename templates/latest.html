@@ -16,6 +16,10 @@
 {% endblock %}
 
 {% block content %}
+  <script id="id_add_link_dict" type="application/json">
+    {{ add_link_dict|tojson }}
+  </script>
+
   <div class="log_in" id="id_div_log_in">
     <form method="POST" action="{{ url_for('log_in') }}">
       <div class="form-group">
@@ -31,6 +35,7 @@
   <div class="add_edit" id="id_add_edit">
     <form action="#">
       <input type="hidden" name="big_id" id="id_big_id" value="">
+      <input type="hidden" name="return_to" id="id_return_to" value="">
 
       <div class="form-group">
         <label for="id_link">Link</label>
@@ -84,4 +89,6 @@
   {% endif %}
     <a class="pagination" href="?start={{ next_start }}{% if search %}&search={{ search }}{% endif %}">Older &raquo;</a>
 </div>
+
 {% endblock %}
+

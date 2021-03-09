@@ -54,6 +54,12 @@ def _index(username, is_private_user_page):
     search = flask.request.args.get('search', '').strip()
     search = search or None
 
+    add_link_dict = {
+        'url': flask.request.args.get('add'),
+        'title': flask.request.args.get('title'),
+        'return_to': flask.request.args.get('return_to'),
+    }
+
     recent = db.get_bookmarks(50, offset=start, search=search, username=username,
                               include_private=is_private_user_page)
     columns = {name: idx for idx, name in enumerate(recent['columns'])}
@@ -62,7 +68,8 @@ def _index(username, is_private_user_page):
     prev_start = max(0, start - len(recent['rows'])) if start else None
 
     return flask.render_template('latest.html', columns=columns, rows=recent['rows'], next_start=next_start,
-                                 prev_start=prev_start, search=search, is_private_user_page=is_private_user_page)
+                                 prev_start=prev_start, search=search, is_private_user_page=is_private_user_page,
+                                 add_link_dict=add_link_dict)
 
 @app.route('/')
 def index():
@@ -104,7 +111,9 @@ def bookmark():
 
         big_id = db.add_edit_bookmark(bookmark_dict)
 
-        return {'updated': True, 'big_id': big_id}
+        return_to = json_data.get('return_to') or '.'
+
+        return {'updated': True, 'big_id': big_id, 'return_to': return_to}
 
 @app.route('/apikey')
 @flask_login.login_required
