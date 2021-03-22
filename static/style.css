@@ -236,3 +236,20 @@ div.log_in {
 	display: none;
 }
 
+div.aboutcode {
+	width: 40em;
+	text-align: center;
+}
+
+div.aboutcode a {
+	font-size: smaller;
+	text-decoration: none;
+	color: #005;
+}
+
+div.aboutcode a:visited {
+	font-size: smaller;
+	text-decoration: none;
+	color: #005;
+}
+

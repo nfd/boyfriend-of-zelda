@@ -7,7 +7,7 @@
     <form><input class="control" name="search" type="text" id="id_search" {% if search %} value="{{ search }}" {% endif %} placeholder="&#x1f50d;"></form>
     <span class="user">
       {% if current_user.is_authenticated %}
-      <a class="a_user_control" href="{% if is_private_user_page %}{{ url_for('show_api_key') }}{% else %}{{ url_for('index_for_user', username=current_user.username) }}{% endif %}">&#x1F9D1;</a>
+        <a class="a_user_control" href="{% if is_private_user_page %}{{ url_for('show_api_key') }}{% else %}{{ url_for('index_for_user', username=current_user.username) }}{% endif %}">&#x1F9D1;</a>
       {% else %}
         <a id="id_a_log_in" class="a_user_control" href="#">&#x1F916; Log in</a>
       {% endif %}
@@ -90,6 +90,9 @@
     <a class="pagination" href="?start={{ prev_start }}{% if search %}&search={{ search }}{% endif %}">&laquo; Newer</a>
   {% endif %}
     <a class="pagination" href="?start={{ next_start }}{% if search %}&search={{ search }}{% endif %}">Older &raquo;</a>
+</div>
+<div class="aboutcode">
+    <a href="https://github.com/nfd/boyfriend-of-zelda">&#x1F4DC; Boyfriend of Zelda </a>
 </div>
 
 {% endblock %}
