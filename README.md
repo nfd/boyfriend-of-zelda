@@ -35,7 +35,18 @@ Before you start, you'll need to create a user:
 
 Setup: Docker / Dokku / Heroku
 ------------------------------
-The included Dockerfile means you can just `push` this to the Heroku-ish server of your choice. I use [Dokku](https://dokku.com/). You'll still need to add a user (see above).
+The included Dockerfile means you can just `push` this to the Heroku-ish server of your choice. I use [Dokku](https://dokku.com/), so here's what I did using Dokku's command-line interface:
+
+    dokku enter boyfriend-of-zelda /usr/local/bin/python3 -m flask add-user <username>
+
+... set the secret key:
+
+	dokku config:set boyfriend-of-zelda SECRET_KEY=<a large string>
+
+... and mount permanent storage on /instance (this is optional, but if you don't do it then anything which stops the
+instance, such as redeployment or a reboot, will erase your data):
+
+	dokku storage:mount boyfriend-of-zelda /var/lib/dokku/data/storage/boyfriend-of-zelda:/instance
 
 Usage
 -----

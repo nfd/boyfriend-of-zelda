@@ -3,3 +3,4 @@ Session.vim
 instance/*
 *export*.xml
 deploy-config.txt
+backups
