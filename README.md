@@ -10,8 +10,8 @@ It uses sqlite and is thus designed for a single user (or only a few users).
 
 Setup
 -----
-I run this in a Docker container using Docker -- if you would like to do that too, see the Docker section instead. But
-you can of course run this as a Python app in the standard Pythoney way. Be sure to set `INSTANCE_PATH` to the
+I run this inside a Docker container -- if you would like to do that too, see the Docker section instead.
+If not, you can of course run this as a Python app in the standard Pythoney way. Be sure to set `INSTANCE_PATH` to the
 directory which will contain the database.
 
     python3 -m pip install -r requirements.txt  # Do this in a virtualenv unless this is a dedicated server
