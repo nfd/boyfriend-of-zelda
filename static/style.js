@@ -90,7 +90,7 @@ function edit_bookmark(event)
     elemid("id_big_id").value = big_id;
     elemid("id_link").value = bookmark_div.getElementsByClassName("href")[0].textContent;
     elemid("id_title").value = bookmark_div.getElementsByClassName("description")[0].textContent;
-    elemid("id_extended").value = bookmark_div.getElementsByClassName("extended")[0].textContent;
+    elemid("id_extended").value = bookmark_div.getElementsByClassName("extended")[0].innerText;
     var tags = [];
     for(element of bookmark_div.getElementsByClassName("tag")) {
         tags.push(element.textContent);
