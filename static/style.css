@@ -124,6 +124,7 @@ div.content
 
 .add_edit textarea {
 	width: 100%;
+	height: 8em;
 	padding: 5px;
 	border: 1px solid #aaa;
 	border-radius: 5px;
