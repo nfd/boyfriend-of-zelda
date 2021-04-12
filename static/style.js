@@ -187,6 +187,18 @@ function init_add_link_dict(add_link_dict_element_id)
         } else {
             enable_add_edit_frame_for_add();
             elemid('id_link').value = add_link_dict.url;
+            if(add_link_dict.extended)
+                elemid('id_extended').value = add_link_dict.extended;
+            if(add_link_dict.tags !== undefined)
+                elemid('id_tags').value = add_link_dict.tags;
+            if(add_link_dict.big_id !== undefined) {
+                elemid('id_big_id').value = add_link_dict.big_id;
+                elemid("id_addedit_submit").value = "Update";
+            }
+            if(add_link_dict.shared !== undefined) {
+                elemid('id_shared').checked = Boolean(add_link_dict.shared);
+                update_shared_checkbox(null);
+            }
             if(add_link_dict.title)
                 elemid('id_title').value = add_link_dict.title;
             if(add_link_dict.return_to)

@@ -93,7 +93,7 @@ def _update_bookmark(cursor, bookmark_dict):
     update_keys = ('href', 'description', 'extended', 'tags', 'shared')
     keys, values = _prepare_bookmark_add_edit(cursor, bookmark_dict, update_keys)
 
-    updates = ', '.join(f'{key} = ?' for key, value in zip(keys, values))
+    updates = ', '.join(f'{key} = ?' for key in keys)
     cursor.execute(f"UPDATE bookmarks SET {updates} WHERE big_id=?", values + [bookmark_dict['big_id']])
 
 def add_edit_bookmark(bookmark_dict):
@@ -109,6 +109,46 @@ def add_edit_bookmark(bookmark_dict):
 def delete_bookmark(big_id):
     with db_cursor() as cursor:
         cursor.execute('DELETE FROM bookmarks WHERE big_id=?', (big_id,))
+
+def _format_where_clauses(where_clauses):
+    if where_clauses:
+        return 'WHERE ' + ' AND '.join(f'({clause})' for clause in where_clauses)
+    else:
+        return ''
+
+BOOKMARK_COLUMNS = ['id', 'created', 'href', 'description', 'extended', 'tags', 'big_id', 'shared']
+
+def get_bookmark_for_href(href, username=None, include_private=True):
+    " Return a bookmark dict for 'url' if we have it or None if not. "
+    if username is None:
+        include_private = False
+
+    where_clauses = []
+    args = []
+
+    where_clauses.append('href = ?')
+    args.append(href)
+
+    if include_private is False:
+        where_clauses.append('shared=1')
+
+    if username:
+        where_clauses.append('owner = (select id from valued_customers where username=?)')
+        args.append(username)
+
+    where_clause = _format_where_clauses(where_clauses)
+
+    with db_cursor() as cursor:
+        columns_str = ', '.join(BOOKMARK_COLUMNS)
+        cursor.execute('SELECT ' + columns_str + ' FROM bookmarks ' \
+                     + where_clause, args)
+        result = cursor.fetchone()
+        if result:
+            bookmark_dict = {column: result[idx] for idx, column in enumerate(BOOKMARK_COLUMNS)}
+        else:
+            bookmark_dict = None
+
+    return bookmark_dict
 
 def get_bookmarks(limit, offset=0, search=None, username=None, include_private=False):
     if username is None:
@@ -132,15 +172,11 @@ def get_bookmarks(limit, offset=0, search=None, username=None, include_private=F
         where_clauses.append('owner = (select id from valued_customers where username=?)')
         args.append(username)
 
-    if where_clauses:
-        where_clause = 'WHERE ' + ' AND '.join(f'({clause})' for clause in where_clauses)
-    else:
-        where_clause = ''
-
+    where_clause = _format_where_clauses(where_clauses)
     args.extend([limit, offset])
 
-    curs.execute('SELECT id, created, href, description, extended, tags, big_id, shared FROM bookmarks ' \
-                 + where_clause\
+    columns_str = ', '.join(BOOKMARK_COLUMNS)
+    curs.execute('SELECT ' + columns_str + ' FROM bookmarks ' + where_clause\
                  + 'ORDER BY created DESC LIMIT ? OFFSET ?', args)
     recents['columns'] = [elem[0] for elem in curs.description]
     recents['rows'] = [list(row) for row in curs.fetchall()]

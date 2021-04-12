@@ -65,6 +65,17 @@ def _index(username, is_private_user_page):
         'return_to': flask.request.args.get('return_to'),
     }
 
+    if add_link_dict['url'] and flask_login.current_user.is_authenticated:
+        bookmark_dict = db.get_bookmark_for_href(add_link_dict['url'], username=flask_login.current_user.username,
+                                                 include_private=True)
+        if bookmark_dict:
+            # We've already added this bookmark, so switch to editing it.
+            add_link_dict['title'] = bookmark_dict['description']
+            add_link_dict['extended'] = bookmark_dict['extended']
+            add_link_dict['big_id'] = bookmark_dict['big_id']
+            add_link_dict['tags'] = bookmark_dict['tags']
+            add_link_dict['shared'] = bookmark_dict['shared']
+
     recent = db.get_bookmarks(50, offset=start, search=search, username=username,
                               include_private=is_private_user_page)
     columns = {name: idx for idx, name in enumerate(recent['columns'])}
