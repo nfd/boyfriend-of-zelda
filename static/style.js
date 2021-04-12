@@ -123,9 +123,10 @@ function delete_bookmark(event)
     event.preventDefault();
 }
 
-function show_login_form(event)
+function show_login_form(event_opt)
 {
-    event.preventDefault();
+    if(event_opt !== undefined)
+        event.preventDefault();
 
     elemid("id_div_log_in").style.display = "block";
     elemid("id_username").focus();
@@ -181,12 +182,16 @@ function init_add_link_dict(add_link_dict_element_id)
     var add_link_dict = JSON.parse(document.getElementById(add_link_dict_element_id).textContent);
 
     if(add_link_dict.url) {
-        enable_add_edit_frame_for_add();
-        elemid('id_link').value = add_link_dict.url;
-        if(add_link_dict.title)
-            elemid('id_title').value = add_link_dict.title;
-        if(add_link_dict.return_to)
-            elemid('id_return_to').value = add_link_dict.return_to;
+        if(add_link_dict.login_required) {
+            show_login_form();
+        } else {
+            enable_add_edit_frame_for_add();
+            elemid('id_link').value = add_link_dict.url;
+            if(add_link_dict.title)
+                elemid('id_title').value = add_link_dict.title;
+            if(add_link_dict.return_to)
+                elemid('id_return_to').value = add_link_dict.return_to;
+        }
     }
 }
 
@@ -212,7 +217,7 @@ function init(event)
     if(elemid("id_a_log_in") !== null)
         elemid("id_a_log_in").addEventListener("click", show_login_form);
 
-    /* Add a link (for bookmarklets) */
+    /* Open the add/edit frame for editing (for bookmarklets) */
     init_add_link_dict('id_add_link_dict');
 }
 

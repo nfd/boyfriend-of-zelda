@@ -45,7 +45,11 @@ def log_in():
     if user := db.User.from_username_and_password(username, password):
         flask_login.login_user(user, remember=True, duration=USER_LOGIN_DURATION)
 
-    return flask.redirect(flask.url_for('index_for_user', username=username))
+    redirect_url = flask.url_for('index_for_user', username=username)
+    if flask.request.query_string:
+        redirect_url += '?' + flask.request.query_string.decode()
+
+    return flask.redirect(redirect_url)
 
 def _index(username, is_private_user_page):
     start = flask.request.args.get('start')
@@ -55,6 +59,7 @@ def _index(username, is_private_user_page):
     search = search or None
 
     add_link_dict = {
+        'login_required': not flask_login.current_user.is_authenticated,
         'url': flask.request.args.get('add'),
         'title': flask.request.args.get('title'),
         'return_to': flask.request.args.get('return_to'),

@@ -21,7 +21,7 @@
   </script>
 
   <div class="log_in" id="id_div_log_in">
-    <form method="POST" action="{{ url_for('log_in') }}">
+    <form method="POST" action="{{ url_for('log_in') }}{% if request.query_string %}?{{request.query_string.decode()}}{% endif %}">
       <div class="form-group">
         <label for="id_username">User name</label>
         <input type="text" name="username" id="id_username">
