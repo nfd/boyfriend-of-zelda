@@ -102,7 +102,6 @@ function edit_bookmark(event)
     }
     elemid("id_tags").value = tags.join(" ");
     elemid("id_addedit_submit").value = "Update";
-    console.log(bookmark_div.classList.contains("private"));
     elemid("id_shared").checked = !(bookmark_div.classList.contains("private"));
     update_shared_checkbox(null);
 
@@ -158,8 +157,6 @@ function add_edit_submit(event)
     }).then(response => response.json())
     .then(data => {
         if(data.updated === true) {
-            //console.log("Would add ");
-            // console.log(data);
             if (data.return_to == '.') {
                 // TODO rather than refresh, update the DOM (and clear the form!).
                 window.location.reload();
