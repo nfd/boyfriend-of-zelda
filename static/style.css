@@ -3,9 +3,24 @@ body {
 	background: #eef;
 }
 
+header {
+	position: sticky;
+	top: 5px;
+}
+
 div.content 
 {
-	padding-top: 40px;
+	width: 40em;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+}
+
+#id_controls {
+	display: flex;
+	flex-direction: row;
+	align-items: baseline;
+	width: 100%;
 }
 
 .hidden {
@@ -13,7 +28,6 @@ div.content
 }
 
 .bookmark {
-	width: 40em;
 	padding: 0.5em;
 	padding: 1em;
 	border-bottom: 1px dotted #aab;
@@ -57,16 +71,11 @@ div.content
 }
 
 .add_edit {
+	position: absolute;
 	padding: 5px;
 	width: 40em;
 	display: none;
-}
-
-#id_controls {
-	position: fixed;
-	width: 40em;
-	height: 40px;
-	text-align: right;
+	background: #ddf;
 }
 
 .control {
@@ -92,15 +101,12 @@ div.content
 
 #id_search {
 	background: #fff7f0;
+	flex-grow: 1;
 }
 
 #id_shared_label {
 	margin-top: 0.7em;
 	background: #fea;
-}
-
-#id_controls form {
-	display: inline;
 }
 
 #id_controls span.user {

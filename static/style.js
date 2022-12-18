@@ -62,6 +62,13 @@ function on_add_bookmark_clicked(event) {
     event.preventDefault();
 }
 
+function on_search_keyup(event) {
+    if(event.keyCode == 13) {
+        event.preventDefault();
+        elemid("searchform").submit();
+    }
+}
+
 function toggle_edit_mode(event)
 {
     for(element of document.getElementsByClassName("bookmark_controls")) {
@@ -222,6 +229,9 @@ function init(event)
 
     /* "+" toggle button */
     elemid("id_add_button").addEventListener("click", on_add_bookmark_clicked);
+
+    /* Searching */
+    elemid("id_search").addEventListener("keyup", on_search_keyup);
 
     /* "Edit" toggle button */
     elemid("id_edit_button").addEventListener("click", toggle_edit_mode);

@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 
 {% block header %}
+  <form id="searchform"></form>
   <div id="id_controls">
     <button class="control {% if not current_user.is_authenticated %} hidden {% endif %}" id="id_add_button">+</button>
     <button class="control {% if not current_user.is_authenticated %} hidden {% endif %}" id="id_edit_button">Edit</button>
-    <form><input class="control" name="search" type="text" id="id_search" {% if search %} value="{{ search }}" {% endif %} placeholder="&#x1f50d;"></form>
+    <input class="control" form="searchform" name="search" type="text" id="id_search" {% if search %} value="{{ search }}" {% endif %} placeholder="&#x1f50d;">
     <span class="user">
       {% if current_user.is_authenticated %}
         <a class="a_user_control" href="{% if is_private_user_page %}{{ url_for('show_api_key') }}{% else %}{{ url_for('index_for_user', username=current_user.username) }}{% endif %}">&#x1F9D1;</a>
