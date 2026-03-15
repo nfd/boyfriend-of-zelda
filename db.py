@@ -189,6 +189,10 @@ def add_user(username, password_hash):
     with db_cursor() as cursor:
         cursor.execute('INSERT INTO valued_customers(username, password_hash) VALUES(?, ?)', (username, password_hash))
 
+def update_password(username, password_hash):
+    with db_cursor() as cursor:
+        cursor.execute('UPDATE valued_customers SET password_hash=? WHERE username=?', (password_hash, username))
+
 def _user_id_for_username(cursor, username):
     cursor.execute('SELECT id FROM valued_customers WHERE username=?', (username,))
     return cursor.fetchone()[0]
@@ -301,8 +305,18 @@ def db_add_user_command(username):
     password_hash = bcrypt.hashpw(password, bcrypt.gensalt())
     add_user(username, password_hash)
 
+@click.command('change-password')
+@click.argument('username')
+@with_appcontext
+def db_change_password_command(username):
+    password = getpass.getpass(f"New password for {username}: ")
+    password = password.encode()
+    password_hash = bcrypt.hashpw(password, bcrypt.gensalt())
+    update_password(username, password_hash)
+
 def init_app(app):
     app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)
     app.cli.add_command(db_import_command)
     app.cli.add_command(db_add_user_command)
+    app.cli.add_command(db_change_password_command)
