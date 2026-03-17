@@ -163,7 +163,7 @@ def get_bookmarks(limit, offset=0, search=None, username=None, include_private=F
     where_clauses = []
     if search:
         where_clauses.append('description LIKE ? OR extended LIKE ? OR tags LIKE ?')
-        args.extend([f'%{search}%', f'%{search}%', f';{search};'])
+        args.extend([f'%{search}%', f'%{search}%', f'%;{search};%'])
 
     if include_private is False:
         where_clauses.append('shared=1')
