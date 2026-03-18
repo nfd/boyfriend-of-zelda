@@ -157,6 +157,9 @@ function add_edit_submit(event)
         return_to: elemid("id_return_to").value
     }
 
+    var submit_button = elemid("id_addedit_submit");
+    submit_button.disabled = true;
+
     fetch("/bookmark", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -170,7 +173,11 @@ function add_edit_submit(event)
             } else {
                 window.location.href = data.return_to;
             }
+        } else {
+            submit_button.disabled = false;
         }
+    }).catch(() => {
+        submit_button.disabled = false;
     });
     return false;
 }
