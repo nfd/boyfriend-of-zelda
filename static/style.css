@@ -158,6 +158,10 @@ input[type='submit'] {
 	background: #fac;
 }
 
+input[type='submit']:disabled {
+	background: #ddd;
+}
+
 .toggle{
 	display:inline-block;
 }
