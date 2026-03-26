@@ -16,6 +16,7 @@ directory which will contain the database.
 
     python3 -m pip install -r requirements.txt  # Do this in a virtualenv unless this is a dedicated server
 	export INSTANCE_PATH=/somewhere
+    export SECRET_KEY=xxx
 
 Once you've configured the site (see "Configuration"), you can then start it as follows:
 

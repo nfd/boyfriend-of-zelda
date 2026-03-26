@@ -1,0 +1,5 @@
+[project]
+name = "boyfriend-of-zelda"
+version = "0.1.0"
+description = "Boyfriend of Zelda"
+requires-python = ">=3.14"
