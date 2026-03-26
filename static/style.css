@@ -1,24 +1,45 @@
+:root {
+	--font-size: 14pt;
+	--font-size-label: 11pt;
+	--font-size-control: var(--font-size);
+	--font-size-heading: 1.4em;
+	--font-size-pagination: 18pt;
+
+	--padding: 8px;
+	--padding-half: 4px;
+	--padding-double: 16px;
+	--padding-triple: 24px;
+
+	--content-width: 54em;
+	--radius: 5px;
+	--border-color: #aaa;
+
+	--color-bg: #eef;
+	--color-link: #005;
+}
+
 *, *::before, *::after {
 	box-sizing: border-box;
 }
 
 body {
 	font-family: sans-serif;
-	background: #eef;
+	font-size: var(--font-size);
+	background: var(--color-bg);
 	margin: 0;
 }
 
 header {
 	position: sticky;
 	top: 0;
-	background: #eef;
-	padding: 5px 0;
+	background: var(--color-bg);
+	padding: calc(var(--padding) * 1.5) 0;
 	z-index: 1;
 }
 
 div.content
 {
-	width: 40em;
+	width: var(--content-width);
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -35,8 +56,7 @@ div.content
 }
 
 .bookmark {
-	padding: 0.5em;
-	padding: 1em;
+	padding: calc(var(--padding) * 1.5) var(--padding);
 	border-bottom: 1px dotted #aab;
 }
 
@@ -46,19 +66,20 @@ div.content
 
 .bookmark h2 {
 	padding: 0;
-	padding-bottom: 5px;
+	padding-bottom: var(--padding);
 	margin: 0;
 	border: 0;
+	font-size: var(--font-size-heading);
 }
 
 .bookmark h2 a {
 	text-decoration: none;
-	color: #005;
+	color: var(--color-link);
 }
 
 .bookmark h2 a:visited {
 	text-decoration: none;
-	color: #005;
+	color: var(--color-link);
 }
 
 .bookmark .href {
@@ -69,8 +90,7 @@ div.content
 	font-size: smaller;
 	border: 1px solid black;
 	background: #aaf;
-	padding-left: 0.2em;
-	padding-right: 0.2em;
+	padding: calc(var(--padding) * 0.2) calc(var(--padding) * 0.5);
 }
 
 .created {
@@ -78,7 +98,7 @@ div.content
 }
 
 .add_edit {
-	padding: 5px;
+	padding: var(--padding-double);
 	display: none;
 	background: #ddf;
 	scroll-margin-top: 3em;
@@ -86,15 +106,13 @@ div.content
 
 .control {
 	border: 0;
-	border-radius: 5px;
-	font-size: 12pt;
+	border-radius: var(--radius);
+	font-size: var(--font-size-control);
 	font-weight: bold;
 	box-shadow: 5px 5px 5px gray;
-	padding: 5px;
-	padding-left: 20px;
-	padding-right: 20px;
-	margin-left: 16px;
-	margin-bottom: 16px;
+	padding: var(--padding) var(--padding-triple);
+	margin-left: var(--padding-double);
+	margin-bottom: var(--padding-double);
 }
 
 #id_add_button {
@@ -123,24 +141,24 @@ div.content
 
 .add_edit input[type='text'],input[type='url'] {
 	width: 100%;
-	padding: 5px;
-	border: 1px solid #aaa;
-	border-radius: 5px;
+	padding: var(--padding);
+	border: 1px solid var(--border-color);
+	border-radius: var(--radius);
 }
 
 .log_in input[type='text'],input[type='password'] {
-	width: 20am;
-	padding: 5px;
-	border: 1px solid #aaa;
-	border-radius: 5px;
+	width: 20em;
+	padding: var(--padding);
+	border: 1px solid var(--border-color);
+	border-radius: var(--radius);
 }
 
 .add_edit textarea {
 	width: 100%;
 	height: 8em;
-	padding: 5px;
-	border: 1px solid #aaa;
-	border-radius: 5px;
+	padding: var(--padding);
+	border: 1px solid var(--border-color);
+	border-radius: var(--radius);
 }
 
 
@@ -151,24 +169,24 @@ span.tags {
 }
 
 label {
-	font-size: 9pt;
+	font-size: var(--font-size-label);
 }
 
 .form-group {
-	margin-top: 5px;
-	margin-bottom: 5px;
+	margin-top: var(--padding);
+	margin-bottom: var(--padding);
 }
 
 .form-group-row {
 	display: flex;
 	align-items: flex-end;
-	gap: 5px;
+	gap: var(--padding);
 }
 
 input[type='submit'] {
-	padding: 5px;
-	border: 1px solid #aaa;
-	border-radius: 5px;
+	padding: var(--padding) var(--padding-double);
+	border: 1px solid var(--border-color);
+	border-radius: var(--radius);
 	background: #fac;
 }
 
@@ -208,14 +226,11 @@ input[type='submit']:disabled {
 
 .bookmark_controls button {
 	border: 0;
-	border-radius: 5px;
+	border-radius: var(--radius);
 	box-shadow: 2px 2px 5px gray;
 	background: white;
-	padding-left: 15px;
-	padding-right: 15px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	font-size: 14pt;
+	padding: var(--padding-half) var(--padding-double);
+	font-size: var(--font-size-control);
 }
 
 .bookmark_controls .bookmark_delete {
@@ -224,55 +239,54 @@ input[type='submit']:disabled {
 }
 
 div.pagination {
-	width: 40em;
+	width: var(--content-width);
 	text-align: center;
 }
 
 a.pagination {
-	font-size: 16pt;
+	font-size: var(--font-size-pagination);
 	display: inline-block;
-	margin: 10px;
+	margin: var(--padding);
 	text-decoration: none;
-	color: #005;
+	color: var(--color-link);
 }
 
 a.pagination:visited {
-	color: #005;
+	color: var(--color-link);
 }
 
 .a_user_control {
 	font-size: smaller;
 	text-decoration: none;
-	color: #005;
+	color: var(--color-link);
 }
 
 .a_user_control:visited {
-	color: #005;
+	color: var(--color-link);
 }
 
 div.log_in {
-	width: 40em;
+	width: var(--content-width);
 	text-align: center;
-	padding: 5px;
+	padding: var(--padding-double);
 	background: white;
-	border-radius: 5px;
+	border-radius: var(--radius);
 	display: none;
 }
 
 div.aboutcode {
-	width: 40em;
+	width: var(--content-width);
 	text-align: center;
 }
 
 div.aboutcode a {
 	font-size: smaller;
 	text-decoration: none;
-	color: #005;
+	color: var(--color-link);
 }
 
 div.aboutcode a:visited {
 	font-size: smaller;
 	text-decoration: none;
-	color: #005;
+	color: var(--color-link);
 }
-
