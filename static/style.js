@@ -1,4 +1,5 @@
 elemid = null;
+var editing_bookmark_div = null;
 
 function show(idname)
 {
@@ -35,19 +36,32 @@ function clear_add_edit_fields()
     }
 }
 
+function disable_add_edit_frame()
+{
+    elemid("id_add_edit").style.display = "none";
+    if (editing_bookmark_div) {
+        editing_bookmark_div.style.display = "";
+        editing_bookmark_div = null;
+    }
+    elemid("id_add_button").textContent = "+";
+}
+
 function enable_add_edit_frame()
 {
-    var add_frame = elemid("id_add_edit");
-    add_frame.style.display = "block";
-    document.getElementsByTagName("body")[0].scrollTop = 0;
+    disable_add_edit_frame();
+    elemid("id_add_edit").style.display = "block";
     elemid("id_add_button").textContent = "-";
 }
 
 function enable_add_edit_frame_for_add()
 {
     enable_add_edit_frame();
+    // Move form back to its home position in case it was moved for an edit
+    var anchor = elemid("id_add_edit_anchor");
+    anchor.parentNode.insertBefore(elemid("id_add_edit"), anchor.nextSibling);
     clear_add_edit_fields();
     elemid("id_addedit_submit").value = "Add";
+    elemid("id_add_edit").scrollIntoView({behavior: "smooth"});
 }
 
 function on_add_bookmark_clicked(event) {
@@ -55,8 +69,7 @@ function on_add_bookmark_clicked(event) {
     if(add_frame.style.display == "none" || add_frame.style.display == "") {
         enable_add_edit_frame_for_add();
     } else {
-        elemid("id_add_button").textContent = "+";
-        add_frame.style.display = "none";
+        disable_add_edit_frame();
     }
 
     event.preventDefault();
@@ -113,6 +126,12 @@ function edit_bookmark(event)
     update_shared_checkbox(null);
 
     enable_add_edit_frame();
+
+    // Move form inline, replacing the bookmark visually
+    bookmark_div.parentNode.insertBefore(elemid("id_add_edit"), bookmark_div);
+    editing_bookmark_div = bookmark_div;
+    bookmark_div.style.display = "none";
+
     event.preventDefault();
 }
 

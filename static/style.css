@@ -1,19 +1,26 @@
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
 body {
 	font-family: sans-serif;
 	background: #eef;
+	margin: 0;
 }
 
 header {
 	position: sticky;
-	top: 5px;
+	top: 0;
+	background: #eef;
+	padding: 5px 0;
+	z-index: 1;
 }
 
-div.content 
+div.content
 {
 	width: 40em;
 	margin-left: auto;
 	margin-right: auto;
-	position: relative;
 }
 
 #id_controls {
@@ -71,11 +78,10 @@ div.content
 }
 
 .add_edit {
-	position: absolute;
 	padding: 5px;
-	width: 40em;
 	display: none;
 	background: #ddf;
+	scroll-margin-top: 3em;
 }
 
 .control {
@@ -105,8 +111,9 @@ div.content
 }
 
 #id_shared_label {
-	margin-top: 0.7em;
 	background: #fea;
+	margin-bottom: 0;
+	margin-left: 0;
 }
 
 #id_controls span.user {
@@ -138,8 +145,9 @@ div.content
 
 
 span.tags {
-	width: 34em;
-	display: inline-block;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
 }
 
 label {
@@ -149,6 +157,12 @@ label {
 .form-group {
 	margin-top: 5px;
 	margin-bottom: 5px;
+}
+
+.form-group-row {
+	display: flex;
+	align-items: flex-end;
+	gap: 5px;
 }
 
 input[type='submit'] {
@@ -183,10 +197,8 @@ input[type='submit']:disabled {
 }
 
 .add_edit_shared {
-	display: block;
 	width: 6em;
 	text-align: center;
-	float: right;
 }
 
 .bookmark_controls {
