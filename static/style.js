@@ -115,6 +115,8 @@ function edit_bookmark(event)
     const extended = bookmark_div.getElementsByClassName("extended")[0];
     if(extended !== undefined) {
         elemid("id_extended").value = extended.innerText;
+    } else {
+        elemid("id_extended").value = "";
     }
     var tags = [];
     for(element of bookmark_div.getElementsByClassName("tag")) {

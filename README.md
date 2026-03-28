@@ -18,21 +18,23 @@ directory which will contain the database.
 	export INSTANCE_PATH=/somewhere
     export SECRET_KEY=xxx
 
-Once you've configured the site (see "Configuration"), you can then start it as follows:
+Before you start, you'll need to initialise the database:
 
-	gunicorn -b 127.0.0.1:80 app:app
+    flask init-db
 
-Best practice is to put gunicorn (or the wsgi-compatible server of your choice) behind nginx, Apache, or similar.
-
-Configuration
--------------
-Before you start, you'll need to create a user:
+... add a user:
 
 	flask add-user yourusername
 
 ... and optionally import your Delicious / Pinboard export:
 
 	flask db-import pinboard-or-delicious-dump.xml
+
+You can then start the site as follows:
+
+	gunicorn -b 127.0.0.1:80 app:app
+
+Best practice is to put gunicorn (or the wsgi-compatible server of your choice) behind nginx, Apache, or similar.
 
 Setup: Docker / Dokku / Heroku
 ------------------------------
